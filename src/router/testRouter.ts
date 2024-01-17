@@ -1,19 +1,13 @@
-import Router from 'koa-router';
 import ServerError from '../utility/serverError';
-
-const router = new Router();
-type RequestBody = {
-  test: string;
-};
-
-router.get('/testRouter', async ctx => {
+import type {Context} from 'koa';
+async function testRouter(ctx: Context): Promise<boolean> {
   try {
-    const {test} = ctx.request.body as RequestBody;
-    return test;
-    ctx.body = test;
+    ctx.body = true;
+    return true;
   } catch (e) {
-    throw new ServerError('TEST_ERROR', {info: 500});
+    console.error(e);
+    throw new ServerError('TEST_ERROR', 500, {additionalDetail: 'some detail'});
   }
-});
+}
 
-export default router;
+export default testRouter;

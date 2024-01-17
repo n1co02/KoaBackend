@@ -1,8 +1,9 @@
-import { MessageType, Color } from "../types";
+import {MessageType, Color} from '../types';
 
 export default function log(
   msg: string | Array<string> | unknown,
-  color: MessageType
+  color: MessageType,
+  code?: string | number,
 ): void {
   switch (color) {
     case MessageType.Start:
@@ -18,7 +19,7 @@ export default function log(
       console.log(Color.Orange, msg, Color.Reset);
       break;
     case MessageType.Error:
-      console.log(Color.Red, msg, Color.Reset);
+      console.log(Color.Red, msg, code, Color.Reset);
       break;
     case MessageType.End:
       console.log(Color.LightYellow, msg, Color.Reset);
